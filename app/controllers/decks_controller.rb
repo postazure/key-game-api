@@ -9,11 +9,16 @@ class DecksController < ApplicationController
 
   def create
     deck = Deck.find_or_create_by(deck_params)
-    render json: deck
+    render json: deck, status: :created
   end
 
   def show
-    render json: Deck.find_by_qr_code(params[:qr_code])
+    deck = Deck.find_by_qr_code(params[:id])
+    if deck.present?
+      render json: deck
+    else
+      head :not_found
+    end
   end
 
   private
