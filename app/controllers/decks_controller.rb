@@ -1,4 +1,6 @@
 class DecksController < ApplicationController
+  before_action :authenticate_user!
+
   def index
     decks = Deck.all
     render json: {
