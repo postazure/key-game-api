@@ -13,8 +13,8 @@ class GamesController < ApplicationController
     game = Game.new(
         win: game_params[:win],
         user: current_user,
-        deck_id: Deck.id_from_uuid(game_params[:deck_uuid]),
-        opponent_deck_id: Deck.id_from_uuid(game_params[:opponent_deck_uuid]),
+        deck_uuid: game_params[:deck_uuid],
+        opponent_deck_uuid: game_params[:opponent_deck_uuid],
         notes: game_params[:notes],
     )
 
