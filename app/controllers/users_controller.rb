@@ -4,8 +4,13 @@ class UsersController < ApplicationController
 
     auth_token = SecureRandom.urlsafe_base64
 
-    user = User.find_or_create_by(google_id_token: user_params[:google_id_token], email: user_params[:email])
-    user.update_attribute(:auth_token, auth_token)
+    existing_user = User.find_by(email: user_params[:email])
+    if existing_user.present?
+      existing_user.update(auth_token: auth_token)
+
+    else
+      User.create(google_id_token: user_params[:google_id_token], email: user_params[:email], auth_token: auth_token)
+    end
 
     render json: {token: auth_token}, status: :created
   end
