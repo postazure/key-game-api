@@ -3,8 +3,10 @@ class GamesController < ApplicationController
 
   def index
     games = current_user.games
+    decks = Deck.find(games.pluck(:deck_uuid, :opponent_deck_uuid).flatten)
     render json: {
         games: games.as_json(except: :user),
+        decks: decks.as_json(except: :added_by),
         count: games.count
     }
   end
