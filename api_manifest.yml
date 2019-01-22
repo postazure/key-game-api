@@ -1,0 +1,6 @@
+applications:
+- name: api
+  disk_quota: 1G
+  instances: 1
+  memory: 1G
+  stack: cflinuxfs2
