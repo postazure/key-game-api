@@ -3,4 +3,6 @@ class Deck < ActiveRecord::Base
   has_many :games
 
   validates_uniqueness_of :uuid, :qr_code, :name
+
+  scope :id_from_uuid, ->(uuid) {self.select(:id).find_by(uuid: uuid).id}
 end

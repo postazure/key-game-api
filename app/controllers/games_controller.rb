@@ -10,15 +10,15 @@ class GamesController < ApplicationController
   end
 
   def create
-    game = Game.create(
+    game = Game.new(
         win: game_params[:win],
         user: current_user,
-        deck_id: game_params[:deck_id],
-        opponent_deck_id: game_params[:opponent_deck_id],
+        deck_id: Deck.id_from_uuid(game_params[:deck_uuid]),
+        opponent_deck_id: Deck.id_from_uuid(game_params[:opponent_deck_uuid]),
         notes: game_params[:notes],
     )
 
-    if game
+    if game.save!
       render json: game.as_json(except: :added_by), status: :created
     else
       head 422
@@ -28,6 +28,6 @@ class GamesController < ApplicationController
   private
 
   def game_params
-    params.require(:game).permit(:opponent_deck_id, :deck_id, :notes, :win)
+    params.require(:game).permit(:opponent_deck_uuid, :deck_uuid, :notes, :win)
   end
 end
