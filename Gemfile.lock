@@ -83,6 +83,7 @@ GEM
     minitest (5.11.3)
     msgpack (1.2.6)
     multi_xml (0.6.0)
+    newrelic_rpm (5.7.0.350)
     nio4r (2.3.1)
     nokogiri (1.10.1)
       mini_portile2 (~> 2.4.0)
@@ -149,12 +150,16 @@ DEPENDENCIES
   dotenv-rails
   httparty
   listen (>= 3.0.5, < 3.2)
+  newrelic_rpm
   pg (>= 0.18, < 2.0)
   puma (~> 3.11)
   rails (~> 5.2.2)
   spring
   spring-watcher-listen (~> 2.0.0)
   tzinfo-data
+
+RUBY VERSION
+   ruby 2.6.0p0
 
 BUNDLED WITH
    2.0.1
